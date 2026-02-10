@@ -1,0 +1,72 @@
+---
+title: "Обновить токены"
+api: "GET http://207.154.237.52:8000/auth/refresh-token"
+description: "Обновление access и refresh токенов по refresh-токену"
+---
+
+## Параметры запроса
+
+<ParamField query="remember_me" type="boolean" default="true">
+  Запомнить пользователя (влияет на срок жизни новых токенов)
+</ParamField>
+
+<ParamField query="refresh_token" type="string" required>
+  Действующий refresh-токен
+</ParamField>
+
+## Ответ
+
+<ResponseField name="access_token" type="string">
+  Новый JWT access-токен
+</ResponseField>
+
+<ResponseField name="refresh_token" type="string">
+  Новый JWT refresh-токен
+</ResponseField>
+
+<ResponseField name="token_type" type="string">
+  Тип токена (`bearer`)
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X 'GET' \
+  'http://207.154.237.52:8000/auth/refresh-token?remember_me=true&refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' \
+  -H 'accept: application/json'
+```
+
+```javascript JavaScript
+const refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
+
+const response = await fetch(
+  `http://207.154.237.52:8000/auth/refresh-token?remember_me=true&refresh_token=${refreshToken}`,
+  {
+    headers: { Accept: "application/json" },
+  }
+);
+const result = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "http://207.154.237.52:8000/auth/refresh-token",
+    params={
+        "remember_me": True,
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    }
+)
+result = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "bearer"
+}
+```
+</ResponseExample>

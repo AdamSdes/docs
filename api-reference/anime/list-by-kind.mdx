@@ -1,0 +1,100 @@
+---
+title: "Список аниме по типу"
+api: "GET http://207.154.237.52:8000/anime/get-anime-list-by-kind/{kind}"
+description: "Получение списка аниме, отфильтрованного по типу (tv, movie, ova и т.д.)"
+---
+
+## Параметры пути
+
+<ParamField path="kind" type="string" required>
+  Тип аниме. Допустимые значения:
+
+  | Значение | Описание |
+  |---|---|
+  | `tv` | TV-сериал |
+  | `tv_special` | TV-спецвыпуск |
+  | `ona` | ONA (онлайн) |
+  | `movie` | Полнометражный фильм |
+  | `ova` | OVA |
+  | `special` | Спецвыпуск |
+</ParamField>
+
+## Параметры запроса
+
+<ParamField query="page" type="integer" default="1">
+  Номер страницы
+</ParamField>
+
+<ParamField query="limit" type="integer" default="1">
+  Количество записей на странице
+</ParamField>
+
+## Ответ
+
+<ResponseField name="total_count" type="integer">
+  Общее количество аниме данного типа
+</ResponseField>
+
+<ResponseField name="anime_list" type="array">
+  Массив аниме (структура аналогична [GET /anime/get-anime-list](/api-reference/anime/list))
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X 'GET' \
+  'http://207.154.237.52:8000/anime/get-anime-list-by-kind/tv?page=1&limit=1' \
+  -H 'accept: application/json'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "http://207.154.237.52:8000/anime/get-anime-list-by-kind/tv?page=1&limit=1",
+  {
+    headers: { Accept: "application/json" },
+  }
+);
+const result = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "http://207.154.237.52:8000/anime/get-anime-list-by-kind/tv",
+    params={"page": 1, "limit": 1},
+    headers={"Accept": "application/json"}
+)
+result = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "total_count": 4243,
+  "anime_list": [
+    {
+      "score": 9.29,
+      "poster_url": "https://shiki.one/uploads/poster/animes/52991/dc841cc9fce2aa1e9907a4b61c5d1d92.jpeg",
+      "related_anime_ids": ["59978", "56885", "56805", "58313"],
+      "anime_id": "52991",
+      "status": "released",
+      "episodes": 28,
+      "episodesAired": 27,
+      "nextEpisodeAt": null,
+      "id": "b094db69-e4f9-4387-8be3-dc500ebba9c4",
+      "english": "Frieren: Beyond Journey's End",
+      "duration": 24,
+      "isCensored": false,
+      "russian": "Провожающая в последний путь Фрирен",
+      "aired_on": "2023-09-29T00:00:00",
+      "kind": "tv",
+      "released_on": "2024-03-22T00:00:00",
+      "rating": "pg_13",
+      "season": "fall_2023",
+      "genre_ids": ["27", "2", "8", "10"]
+    }
+  ]
+}
+```
+</ResponseExample>

@@ -1,0 +1,173 @@
+---
+title: "Получить аниме по ID"
+api: "GET http://207.154.237.52:8000/anime/id/{anime_id}"
+description: "Получение подробной информации об аниме по его Shikimori ID"
+---
+
+## Параметры пути
+
+<ParamField path="anime_id" type="string" required>
+  ID аниме (Shikimori ID, например `59978`)
+</ParamField>
+
+## Ответ
+
+<ResponseField name="id" type="string">
+  Внутренний UUID
+</ResponseField>
+
+<ResponseField name="anime_id" type="string">
+  ID аниме (Shikimori)
+</ResponseField>
+
+<ResponseField name="russian" type="string">
+  Русское название
+</ResponseField>
+
+<ResponseField name="english" type="string">
+  Английское название
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Описание (может содержать BBCode-разметку)
+</ResponseField>
+
+<ResponseField name="score" type="number">
+  Рейтинг
+</ResponseField>
+
+<ResponseField name="kind" type="string">
+  Тип (`tv`, `movie`, `ova`, `ona`, `special`)
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Статус (`ongoing`, `released`, `anons`)
+</ResponseField>
+
+<ResponseField name="rating" type="string">
+  Возрастной рейтинг
+</ResponseField>
+
+<ResponseField name="season" type="string">
+  Сезон выхода
+</ResponseField>
+
+<ResponseField name="episodes" type="integer">
+  Общее количество эпизодов
+</ResponseField>
+
+<ResponseField name="episodesAired" type="integer">
+  Количество вышедших эпизодов
+</ResponseField>
+
+<ResponseField name="duration" type="integer">
+  Длительность эпизода в минутах
+</ResponseField>
+
+<ResponseField name="nextEpisodeAt" type="string | null">
+  Дата следующего эпизода (ISO 8601)
+</ResponseField>
+
+<ResponseField name="aired_on" type="string">
+  Дата начала показа
+</ResponseField>
+
+<ResponseField name="released_on" type="string | null">
+  Дата окончания показа
+</ResponseField>
+
+<ResponseField name="poster_url" type="string">
+  URL постера
+</ResponseField>
+
+<ResponseField name="screenshots" type="array">
+  Массив URL скриншотов
+</ResponseField>
+
+<ResponseField name="genre_ids" type="array">
+  Массив ID жанров
+</ResponseField>
+
+<ResponseField name="character_ids" type="array">
+  Массив ID персонажей
+</ResponseField>
+
+<ResponseField name="related_anime_ids" type="array">
+  Массив ID связанных аниме
+</ResponseField>
+
+<ResponseField name="related_anime_texts" type="array">
+  Описания связей
+</ResponseField>
+
+<ResponseField name="isCensored" type="boolean">
+  Флаг цензуры
+</ResponseField>
+
+<ResponseField name="createdAt" type="string">
+  Дата создания записи
+</ResponseField>
+
+<ResponseField name="updatedAt" type="string">
+  Дата последнего обновления
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X 'GET' \
+  'http://207.154.237.52:8000/anime/id/59978' \
+  -H 'accept: application/json'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "http://207.154.237.52:8000/anime/id/59978",
+  {
+    headers: { Accept: "application/json" },
+  }
+);
+const anime = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "http://207.154.237.52:8000/anime/id/59978",
+    headers={"Accept": "application/json"}
+)
+anime = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "score": 9.23,
+  "poster_url": "https://shiki.one/uploads/poster/animes/59978/ec1e1af737f29073a6ecd9c8e3085e25.jpeg",
+  "related_anime_ids": ["52991"],
+  "anime_id": "59978",
+  "status": "ongoing",
+  "createdAt": "2024-09-28T15:49:14",
+  "related_anime_texts": ["Предыстория"],
+  "episodes": 10,
+  "updatedAt": "2026-02-09T16:50:19",
+  "character_ids": ["188176", "184947", "188177", "288260", "288261"],
+  "episodesAired": 4,
+  "nextEpisodeAt": "2026-02-13T17:00:00",
+  "id": "055c19c4-66f0-40dd-a66c-79606370ab6b",
+  "english": "Frieren: Beyond Journey's End Season 2",
+  "duration": 24,
+  "isCensored": false,
+  "russian": "Провожающая в последний путь Фрирен 2",
+  "aired_on": "2026-01-16T00:00:00",
+  "screenshots": ["https://shiki.one/system/screenshots/original/..."],
+  "kind": "tv",
+  "released_on": null,
+  "description": "Эльфийская волшебница Фрирен...",
+  "rating": "pg_13",
+  "season": "winter_2026",
+  "genre_ids": ["27", "2", "8", "10"]
+}
+```
+</ResponseExample>
