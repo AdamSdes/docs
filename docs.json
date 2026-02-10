@@ -63,12 +63,14 @@
             ]
           },
           {
-            "group": "anime",
+            "group": "Anime",
             "pages": [
               "api-reference/anime/list",
               "get",
               "api-reference/anime/list-by-kind",
-              "api-reference/anime/list-by-status"
+              "api-reference/anime/list-by-status",
+              "api-reference/anime/list-by-rating",
+              "api-reference/anime/search"
             ]
           }
         ]
