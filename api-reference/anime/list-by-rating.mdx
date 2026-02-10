@@ -1,0 +1,93 @@
+---
+title: "Список аниме по рейтингу"
+api: "GET http://207.154.237.52:8000/anime/get-anime-list-by-rating/{rating}"
+description: "Получение списка аниме, отфильтрованного по возрастному рейтингу"
+---
+
+## Параметры пути
+
+<ParamField path="rating" type="string" required>
+  Возрастной рейтинг. Допустимые значения:
+
+  | Значение | Описание |
+  |---|---|
+  | `g` | Все возрасты |
+  | `pg` | Дети |
+  | `pg_13` | Подростки 13+ |
+  | `r` | 17+ (насилие и нецензурная лексика) |
+  | `r_plus` | 17+ (лёгкая эротика) |
+</ParamField>
+
+## Параметры запроса
+
+<ParamField query="page" type="integer" default="1">
+  Номер страницы
+</ParamField>
+
+<ParamField query="limit" type="integer" default="1">
+  Количество записей на странице
+</ParamField>
+
+## Ответ
+
+<ResponseField name="total_count" type="integer">
+  Общее количество аниме с данным рейтингом
+</ResponseField>
+
+<ResponseField name="anime_list" type="array">
+  Массив аниме (структура аналогична [GET /anime/get-anime-list](/api-reference/anime/list))
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X 'GET' \
+  'http://207.154.237.52:8000/anime/get-anime-list-by-rating/pg_13?page=1&limit=1' \
+  -H 'accept: application/json'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "http://207.154.237.52:8000/anime/get-anime-list-by-rating/pg_13?page=1&limit=1",
+  {
+    headers: { Accept: "application/json" },
+  }
+);
+const result = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "http://207.154.237.52:8000/anime/get-anime-list-by-rating/pg_13",
+    params={"page": 1, "limit": 1},
+    headers={"Accept": "application/json"}
+)
+result = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "total_count": 5599,
+  "anime_list": [
+    {
+      "score": 9.29,
+      "poster_url": "https://shiki.one/uploads/poster/animes/52991/dc841cc9fce2aa1e9907a4b61c5d1d92.jpeg",
+      "anime_id": "52991",
+      "status": "released",
+      "episodes": 28,
+      "episodesAired": 27,
+      "id": "b094db69-e4f9-4387-8be3-dc500ebba9c4",
+      "english": "Frieren: Beyond Journey's End",
+      "russian": "Провожающая в последний путь Фрирен",
+      "kind": "tv",
+      "rating": "pg_13",
+      "season": "fall_2023",
+      "genre_ids": ["27", "2", "8", "10"]
+    }
+  ]
+}
+```
+</ResponseExample>

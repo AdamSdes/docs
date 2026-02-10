@@ -1,0 +1,106 @@
+---
+title: "Поиск пользователей по имени"
+api: "GET http://207.154.237.52:8000/user/name/{name}"
+description: "Поиск пользователей по части имени"
+---
+
+## Параметры пути
+
+<ParamField path="name" type="string" required>
+  Строка поиска по имени пользователя (поддерживает частичное совпадение)
+</ParamField>
+
+## Ответ
+
+<ResponseField name="total_count" type="integer">
+  Общее количество найденных пользователей
+</ResponseField>
+
+<ResponseField name="user_list" type="array">
+  Массив найденных пользователей
+
+  <Expandable title="Свойства объекта">
+    <ResponseField name="id" type="string">
+      Уникальный идентификатор пользователя (UUID)
+    </ResponseField>
+    <ResponseField name="email" type="string">
+      Email пользователя
+    </ResponseField>
+    <ResponseField name="nickname" type="string">
+      Никнейм пользователя
+    </ResponseField>
+    <ResponseField name="username" type="string">
+      Имя пользователя
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Роль пользователя
+    </ResponseField>
+    <ResponseField name="user_avatar" type="string">
+      Путь к аватару
+    </ResponseField>
+    <ResponseField name="user_banner" type="string">
+      Путь к баннеру
+    </ResponseField>
+    <ResponseField name="password" type="string">
+      Хешированный пароль (bcrypt)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X 'GET' \
+  'http://207.154.237.52:8000/user/name/why' \
+  -H 'accept: application/json'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "http://207.154.237.52:8000/user/name/why",
+  {
+    headers: { Accept: "application/json" },
+  }
+);
+const result = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "http://207.154.237.52:8000/user/name/why",
+    headers={"Accept": "application/json"}
+)
+result = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "total_count": 2,
+  "user_list": [
+    {
+      "email": "whyroma",
+      "nickname": "whyroma",
+      "user_avatar": "./uploads/avatars/dfaad63b-4a3f-4bf0-9ed3-e5d007e9e321.png",
+      "status": "user",
+      "username": "whyroma",
+      "password": "$2b$12$/D06An73hyb22hmjfCeqKuNvXTCSKnWuBrek5lJy/Au/xQDDcsUha",
+      "user_banner": "./uploads/banners/dfaad63b-4a3f-4bf0-9ed3-e5d007e9e321.png",
+      "id": "dfaad63b-4a3f-4bf0-9ed3-e5d007e9e321"
+    },
+    {
+      "email": "skeba@gmail.com",
+      "nickname": "whyskeba",
+      "user_avatar": "./uploads/avatars/a4091a4b-be67-4ca9-8d9f-5afc630656bc.png",
+      "status": "user",
+      "username": "whyskeba",
+      "password": "$2b$12$JDiiE/MkNVqn78gPM4jQnuJjA7kAWYbj4DqxMlToKQhltfVuPSJym",
+      "user_banner": "./uploads/banners/a4091a4b-be67-4ca9-8d9f-5afc630656bc.png",
+      "id": "a4091a4b-be67-4ca9-8d9f-5afc630656bc"
+    }
+  ]
+}
+```
+</ResponseExample>

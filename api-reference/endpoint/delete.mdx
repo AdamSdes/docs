@@ -1,0 +1,67 @@
+---
+title: "Удалить запись"
+api: "DELETE https://api.anisign.com/v1/data/{id}"
+description: "Удаление объекта данных по ID"
+---
+
+## Параметры пути
+
+<ParamField path="id" type="string" required>
+  Уникальный идентификатор объекта для удаления
+</ParamField>
+
+<ParamField header="Authorization" type="string" required>
+  Bearer-токен для аутентификации
+</ParamField>
+
+## Ответ
+
+<ResponseField name="status" type="string">
+  Статус ответа
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Сообщение об успешном удалении
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X DELETE "https://api.anisign.com/v1/data/d_123" \
+  -H "Authorization: Bearer ask_ваш_ключ"
+```
+
+```javascript Node.js
+const response = await fetch("https://api.anisign.com/v1/data/d_123", {
+  method: "DELETE",
+  headers: {
+    Authorization: "Bearer ask_ваш_ключ",
+  },
+});
+```
+
+```python Python
+import requests
+
+response = requests.delete(
+    "https://api.anisign.com/v1/data/d_123",
+    headers={"Authorization": "Bearer ask_ваш_ключ"}
+)
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "status": "success",
+  "message": "Record d_123 has been deleted"
+}
+```
+
+```json 404
+{
+  "status": "error",
+  "code": 404,
+  "message": "Record not found"
+}
+```
+</ResponseExample>

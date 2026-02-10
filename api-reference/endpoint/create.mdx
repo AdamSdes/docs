@@ -1,0 +1,126 @@
+---
+title: "Создать запись"
+api: "POST https://api.anisign.com/v1/data"
+description: "Создание нового объекта данных"
+---
+
+## Тело запроса
+
+<ParamField body="name" type="string" required>
+  Название объекта
+</ParamField>
+
+<ParamField body="description" type="string">
+  Описание объекта
+</ParamField>
+
+<ParamField body="tags" type="array">
+  Массив тегов для категоризации
+</ParamField>
+
+<ParamField body="metadata" type="object">
+  Произвольные метаданные
+
+  <Expandable title="Свойства">
+    <ParamField body="key" type="string">
+      Ключ метаданных
+    </ParamField>
+    <ParamField body="value" type="string">
+      Значение метаданных
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField header="Authorization" type="string" required>
+  Bearer-токен для аутентификации
+</ParamField>
+
+## Ответ
+
+<ResponseField name="status" type="string">
+  Статус ответа
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Созданный объект
+
+  <Expandable title="Свойства">
+    <ResponseField name="id" type="string">
+      Уникальный идентификатор
+    </ResponseField>
+    <ResponseField name="name" type="string">
+      Название
+    </ResponseField>
+    <ResponseField name="description" type="string">
+      Описание
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      Дата создания
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X POST "https://api.anisign.com/v1/data" \
+  -H "Authorization: Bearer ask_ваш_ключ" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New Item",
+    "description": "Описание нового элемента",
+    "tags": ["tag1", "tag2"]
+  }'
+```
+
+```javascript Node.js
+const response = await fetch("https://api.anisign.com/v1/data", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer ask_ваш_ключ",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "New Item",
+    description: "Описание нового элемента",
+    tags: ["tag1", "tag2"],
+  }),
+});
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.anisign.com/v1/data",
+    headers={"Authorization": "Bearer ask_ваш_ключ"},
+    json={
+        "name": "New Item",
+        "description": "Описание нового элемента",
+        "tags": ["tag1", "tag2"]
+    }
+)
+```
+</RequestExample>
+
+<ResponseExample>
+```json 201
+{
+  "status": "success",
+  "data": {
+    "id": "d_456",
+    "name": "New Item",
+    "description": "Описание нового элемента",
+    "tags": ["tag1", "tag2"],
+    "created_at": "2026-02-10T12:30:00Z"
+  }
+}
+```
+
+```json 400
+{
+  "status": "error",
+  "code": 400,
+  "message": "Field 'name' is required"
+}
+```
+</ResponseExample>

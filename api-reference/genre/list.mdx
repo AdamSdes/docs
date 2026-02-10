@@ -1,0 +1,108 @@
+---
+title: "Список жанров"
+api: "GET http://207.154.237.52:8000/genre/get-list-genres"
+description: "Получение полного списка всех жанров аниме"
+---
+
+## Ответ
+
+Возвращает массив объектов жанров.
+
+<ResponseField name="id" type="string">
+  Внутренний UUID жанра
+</ResponseField>
+
+<ResponseField name="genre_id" type="string">
+  ID жанра (Shikimori)
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Английское название жанра
+</ResponseField>
+
+<ResponseField name="russian" type="string">
+  Русское название жанра
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X 'GET' \
+  'http://207.154.237.52:8000/genre/get-list-genres' \
+  -H 'accept: application/json'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "http://207.154.237.52:8000/genre/get-list-genres",
+  {
+    headers: { Accept: "application/json" },
+  }
+);
+const genres = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "http://207.154.237.52:8000/genre/get-list-genres",
+    headers={"Accept": "application/json"}
+)
+genres = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+[
+  {
+    "russian": "Сёнен",
+    "genre_id": "27",
+    "name": "Shounen",
+    "id": "1b20832c-362e-4c99-8e51-596ac69876f7"
+  },
+  {
+    "russian": "Приключения",
+    "genre_id": "2",
+    "name": "Adventure",
+    "id": "87963d72-14de-45b2-b65f-d6abdd0df25f"
+  },
+  {
+    "russian": "Драма",
+    "genre_id": "8",
+    "name": "Drama",
+    "id": "50bdd679-174c-4ee0-b2cf-6e9584f403e6"
+  },
+  {
+    "russian": "Фэнтези",
+    "genre_id": "10",
+    "name": "Fantasy",
+    "id": "8a46667d-fb13-4555-b5cf-3e9ae068e1e0"
+  },
+  {
+    "russian": "Экшен",
+    "genre_id": "1",
+    "name": "Action",
+    "id": "9b1aebb5-a1b3-41a2-815e-fbfb3b7e96e6"
+  },
+  {
+    "russian": "Комедия",
+    "genre_id": "4",
+    "name": "Comedy",
+    "id": "d192d023-079c-4c6a-8a7f-6c06df61511f"
+  },
+  {
+    "russian": "Романтика",
+    "genre_id": "22",
+    "name": "Romance",
+    "id": "a62cea5c-8bb7-4e71-9b0e-79860cd5d620"
+  },
+  {
+    "russian": "Повседневность",
+    "genre_id": "36",
+    "name": "Slice of Life",
+    "id": "7396fb3a-876a-4ed8-a98a-5b7923ef7ca6"
+  }
+]
+```
+</ResponseExample>

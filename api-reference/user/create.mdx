@@ -1,0 +1,108 @@
+---
+title: "Создать пользователя"
+api: "POST http://207.154.237.52:8000/user/create-user"
+description: "Регистрация нового пользователя"
+---
+
+## Тело запроса
+
+<ParamField body="username" type="string" required>
+  Имя пользователя (уникальное)
+</ParamField>
+
+<ParamField body="email" type="string" required>
+  Email пользователя
+</ParamField>
+
+<ParamField body="password" type="string" required>
+  Пароль пользователя
+</ParamField>
+
+<ParamField body="confirm_password" type="string" required>
+  Подтверждение пароля (должен совпадать с `password`)
+</ParamField>
+
+## Ответ
+
+<ResponseField name="user" type="object">
+  Созданный пользователь
+
+  <Expandable title="Свойства">
+    <ResponseField name="username" type="string">
+      Имя пользователя
+    </ResponseField>
+    <ResponseField name="email" type="string">
+      Email пользователя
+    </ResponseField>
+    <ResponseField name="id" type="string">
+      Уникальный идентификатор (UUID)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="access_token" type="string">
+  JWT-токен для аутентификации
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X 'POST' \
+  'http://207.154.237.52:8000/user/create-user' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "testuser",
+  "email": "testemail@gmail.com",
+  "password": "@Ralef1905",
+  "confirm_password": "@Ralef1905"
+}'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "http://207.154.237.52:8000/user/create-user",
+  {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: "testuser",
+      email: "testemail@gmail.com",
+      password: "@Ralef1905",
+      confirm_password: "@Ralef1905",
+    }),
+  }
+);
+const result = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "http://207.154.237.52:8000/user/create-user",
+    json={
+        "username": "testuser",
+        "email": "testemail@gmail.com",
+        "password": "@Ralef1905",
+        "confirm_password": "@Ralef1905"
+    }
+)
+result = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "user": {
+    "username": "testuser",
+    "email": "testemail@gmail.com",
+    "id": "e419c963-c9af-40f3-95fd-5a23864cbc1d"
+  },
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImV4cCI6MTc3MDY5MDA1OH0.YNbZW6jVDH16dmKBFxJKe7wSMzsHcdANbr8L1C8cyJQ"
+}
+```
+</ResponseExample>
