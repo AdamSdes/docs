@@ -63,6 +63,29 @@
             ]
           },
           {
+            "group": "User",
+            "pages": [
+              "api-reference/user/get-avatar",
+              "api-reference/user/get-banner",
+              "api-reference/user/get-by-username",
+              "api-reference/user/list",
+              "api-reference/user/search",
+              "api-reference/user/update-avatar",
+              "api-reference/user/update-banner",
+              "api-reference/user/update-nickname",
+              "api-reference/user/create",
+              "api-reference/user/get"
+            ]
+          },
+          {
+            "group": "Auth",
+            "pages": [
+              "api-reference/auth/logout",
+              "api-reference/auth/refresh",
+              "api-reference/auth/token"
+            ]
+          },
+          {
             "group": "Anime",
             "pages": [
               "api-reference/anime/list",
@@ -71,6 +94,13 @@
               "api-reference/anime/list-by-status",
               "api-reference/anime/list-by-rating",
               "api-reference/anime/search"
+            ]
+          },
+          {
+            "group": "Genre",
+            "pages": [
+              "api-reference/genre/get",
+              "api-reference/genre/list"
             ]
           }
         ]
