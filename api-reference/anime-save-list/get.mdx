@@ -1,0 +1,73 @@
+---
+title: "Получить список аниме по названию"
+api: "GET http://207.154.237.52:8000/anime_save_list/get-anime-list-by-name/{list_name}/user/{user_id}"
+description: "Получение списка сохранённых аниме по названию списка и ID пользователя"
+---
+
+## Параметры пути
+
+<ParamField path="list_name" type="string" required>
+  Название списка. Допустимые значения: `Watching`, `Completed`, `On Hold`, `Dropped`, `Plan to Watch`
+</ParamField>
+
+<ParamField path="user_id" type="string" required>
+  UUID пользователя
+</ParamField>
+
+## Ответ
+
+<ResponseField name="id" type="string">
+  UUID списка
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  UUID пользователя-владельца
+</ResponseField>
+
+<ResponseField name="list_name" type="string">
+  Название списка
+</ResponseField>
+
+<ResponseField name="anime_ids" type="array">
+  Массив ID аниме в списке
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X GET "http://207.154.237.52:8000/anime_save_list/get-anime-list-by-name/Watching/user/dfaad63b-4a3f-4bf0-9ed3-e5d007e9e321" \
+  -H "accept: application/json"
+```
+
+```javascript Node.js
+const response = await fetch(
+  "http://207.154.237.52:8000/anime_save_list/get-anime-list-by-name/Watching/user/dfaad63b-4a3f-4bf0-9ed3-e5d007e9e321",
+  {
+    headers: { accept: "application/json" },
+  }
+);
+
+const data = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "http://207.154.237.52:8000/anime_save_list/get-anime-list-by-name/Watching/user/dfaad63b-4a3f-4bf0-9ed3-e5d007e9e321",
+    headers={"accept": "application/json"},
+)
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "anime_ids": [
+    "52991"
+  ],
+  "user_id": "dfaad63b-4a3f-4bf0-9ed3-e5d007e9e321",
+  "id": "9f1591b9-4105-454a-9824-912f1aef4b08",
+  "list_name": "Watching"
+}
+```
+</ResponseExample>
